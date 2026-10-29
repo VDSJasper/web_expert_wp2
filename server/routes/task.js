@@ -12,7 +12,7 @@ router.get("/",
     taskController.getTasksOfUser
 );
 
-router.get("/all",
+router.get("/tasks",
     cookieParser(),
     authenticate,
     authorize('admin'),
@@ -31,4 +31,16 @@ router.patch("/:taskId",
     authorize('user'),
     taskController.updateTaskCompletion
 );
+
+router.patch("/:taskId/:userId",
+    cookieParser(),
+    bodyParser.json(),
+    (req, res, next) => {
+        next();
+    },
+    authenticate,
+    authorize('admin'),
+    taskController.giveUserTask
+);
+
 module.exports = router;

@@ -28,8 +28,20 @@ module.exports.getAllTasks = async function (req, res, next) {
     try
     {
         const status = 200;
-        const {requestingUser} = req;
-        const tasks = await taskService.getAllTasks(requestingUser.roles)
+        const tasks = await taskService.getAllTasks()
+    } catch (err) {
+        next(err);
+    }
+}
+
+module.exports.giveUserTask = async function (req, res, next) {
+    try {
+        const status = 200;
+        const taskId = req.params.taskId;
+        const userId = req.params.userId;
+        const {completed} = req.body;
+        const task = await taskService.updateTask(taskId, userId, {completed})
+        res.status(status).json(task);
     } catch (err) {
         next(err);
     }
