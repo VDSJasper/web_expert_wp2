@@ -11,3 +11,5 @@ router.get("/users",
     authorize('admin'),
     userController.getAllUsers
 );
+
+module.exports = router;

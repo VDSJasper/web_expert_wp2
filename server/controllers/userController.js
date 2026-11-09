@@ -5,6 +5,7 @@ module.exports.getAllUsers = async function (req, res, next) {
     {
         const status = 200;
         const tasks = await userService.getAllUsers()
+        res.status(status).json(tasks);
     } catch (err) {
         next(err);
     }

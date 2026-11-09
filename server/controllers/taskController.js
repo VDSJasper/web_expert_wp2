@@ -29,6 +29,7 @@ module.exports.getAllTasks = async function (req, res, next) {
     {
         const status = 200;
         const tasks = await taskService.getAllTasks()
+        res.status(status).json(tasks);
     } catch (err) {
         next(err);
     }
